@@ -28,13 +28,13 @@
             <th>Date Created</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($projects as $project)
+        @foreach ($Posts as $post)
             <tr>
                 <td>{{ ++$i }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->text }}</td>
                 <td>{{ $post->author }}</td>
-                <td>{{ date_format(post->created_at, 'jS M Y') }}</td>
+                <td>{{ date_format($post->created_at, 'jS M Y') }}</td>
                 <td>
                     <form action="{{ route('post.destroy', $post->id) }}" method="POST">
 

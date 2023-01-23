@@ -13,9 +13,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $projects = Posts::latest()->paginate(3);
-        return view('posts.index', compact('post'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $post = Posts::latest()->paginate(3);
+        return view('Posts.index', compact('post'))
+            ->with('i', (request()->input('page', 1) - 1) * 3);
     }
 
     /**
@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('Posts.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class PostController extends Controller
      */
     public function show(post $post)
     {
-        return view('posts.show', compact('Post'));
+        return view('Posts.show', compact('post'));
     }
 
     /**
@@ -68,7 +68,7 @@ class PostController extends Controller
      */
     public function edit(Posts $post)
     {
-        return view('posts.edit', compact('post'));
+        return view('Posts.edit', compact('post'));
     }
     /**
      * Update the specified resource in storage.
@@ -86,7 +86,7 @@ class PostController extends Controller
         ]);
         $post->update($request->all());
 
-        return redirect()->route('post.index')
+        return redirect()->route('Posts.index')
             ->with('success', 'Post updated successfully');
     }
     /**
@@ -99,7 +99,7 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect()->route('post.index')
+        return redirect()->route('Posts.index')
             ->with('success', 'Post deleted successfully');
     }
 }
