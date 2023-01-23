@@ -24,7 +24,6 @@
             <th>Title</th>
             <th>Text</th>
             <th>Author</th>
-            <th>Cost</th>
             <th>Date Created</th>
             <th width="280px">Action</th>
         </tr>

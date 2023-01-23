@@ -52,7 +52,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Posts  $project
+     * @param  \App\Models\Posts  $post
      * @return \Illuminate\Http\Response
      */
     public function show(post $post)
