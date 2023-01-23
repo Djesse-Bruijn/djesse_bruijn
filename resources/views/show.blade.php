@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>  {{ $post->name }}</h2>
+                <h2>  {{ $post->title }}</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('post.index') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
@@ -17,19 +17,19 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Title:</strong>
-                {{ $post->name }}
+                {{ $post->title }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Text:</strong>
-                {{ $post->introduction }}
+                {{ $post->text }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Author:</strong>
-                {{ $post->location }}
+                {{ $post->author }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

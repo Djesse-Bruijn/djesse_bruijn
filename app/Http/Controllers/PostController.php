@@ -2,6 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Posts;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -9,21 +13,20 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         $post = Posts::latest()->paginate(3);
-        return view('Post.index', compact('post'))
-            ->with('i', (request()->input('page', 1) - 1) * 3);
+        return view('Post.index', compact('post'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         return view('Post.create');
     }
@@ -31,10 +34,10 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title' => 'required',
@@ -43,7 +46,7 @@ class PostController extends Controller
 
         ]);
 
-        Post::create($request->all());
+        Posts::create($request->all());
 
         return redirect()->route('Post.index')
             ->with('success', 'Post created successfully.');
@@ -52,10 +55,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Posts  $post
-     * @return \Illuminate\Http\Response
+     * @param Posts $post
+     * @return Application|Factory|View
      */
-    public function show(post $post)
+    public function show(Posts $post): View|Factory|Application
     {
         return view('Posts.show', compact('post'));
     }
@@ -63,21 +66,21 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Posts  $post
-     * @return \Illuminate\Http\Response
+     * @param Posts $post
+     * @return Application|Factory|View
      */
-    public function edit(Posts $post)
+    public function edit(Posts $post): View|Factory|Application
     {
         return view('Posts.edit', compact('post'));
     }
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Posts  $post
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Posts $post
+     * @return RedirectResponse
      */
-    public function update(Request $request, Posts $post)
+    public function update(Request $request, Posts $post): RedirectResponse
     {
         $request->validate([
             'title' => 'required',
@@ -92,10 +95,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Posts  $post
-     * @return \Illuminate\Http\Response
+     * @param Posts $post
+     * @return RedirectResponse
      */
-    public function destroy(Posts $post)
+    public function destroy(Posts $post): RedirectResponse
     {
         $post->delete();
 

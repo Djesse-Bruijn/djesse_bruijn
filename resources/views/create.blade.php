@@ -29,20 +29,26 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Title:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Title">
+                    <label>
+                        <input type="text" name="name" class="form-control" placeholder="Title">
+                    </label>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Text:</strong>
-                    <textarea class="form-control" style="height:50px" name="Text"
-                              placeholder="Introduction"></textarea>
+                    <label>
+<textarea class="form-control" style="height:50px" name="Text"
+          placeholder="Introduction"></textarea>
+                    </label>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Author:</strong>
-                    <input type="text" name="location" class="form-control" placeholder="Author">
+                    <label>
+                        <input type="text" name="location" class="form-control" placeholder="Author">
+                    </label>
                 </div>
             </div>
 
