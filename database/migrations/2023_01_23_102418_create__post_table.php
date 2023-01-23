@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('text');
             $table->string('author');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
