@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $projects = post::latest()->paginate(3);
+        $projects = Posts::latest()->paginate(3);
         return view('posts.index', compact('post'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -43,7 +43,7 @@ class PostController extends Controller
 
         ]);
 
-        post::create($request->all());
+        Post::create($request->all());
 
         return redirect()->route('posts.index')
             ->with('success', 'Post created successfully.');
