@@ -1,5 +1,24 @@
 <?php
 
- class Posts extends Models {
+namespace App\Models;
 
- }
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Posts extends Model
+{
+    use HasFactory;
+
+    protected $table = 'post';
+    public $timestamps = true;
+
+    protected $casts = [
+        'cost' => 'float'
+    ];
+
+    protected $fillable = [
+        'title',
+        'text',
+        'author',
+    ];
+}

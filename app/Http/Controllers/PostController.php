@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Models\Posts;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,7 +13,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $projects = post::latest()->paginate(3);
+        return view('posts.index', compact('post'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -23,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -34,51 +36,70 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'text' => 'required',
+            'author' => 'required'
+
+        ]);
+
+        post::create($request->all());
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Posts  $project
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(post $post)
     {
-        //
+        return view('posts.show', compact('Post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Posts  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Posts $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
-
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Posts  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Posts $post)
     {
-        //
-    }
+        $request->validate([
+            'title' => 'required',
+            'text' => 'required',
+            'author' => 'required'
+        ]);
+        $post->update($request->all());
 
+        return redirect()->route('post.index')
+            ->with('success', 'Post updated successfully');
+    }
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Posts  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Posts $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('post.index')
+            ->with('success', 'Post deleted successfully');
     }
 }
